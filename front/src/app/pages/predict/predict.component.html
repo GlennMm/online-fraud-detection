@@ -1,0 +1,129 @@
+<div class="flex flex-wrap mt-4">
+  <div class="w-full xl:w-9/12 mb-12 xl:mb-0 px-4">
+    <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
+      <div class="rounded-t mb-0 px-4 py-3 border-0">
+        <div class="flex flex-wrap items-center">
+          <div class="relative w-full px-4 max-w-full flex-grow flex-1 flex">
+            <h3 class="font-semibold text-base text-blueGray-700">
+              {{dataset?.name || 'Select Dataset' | titlecase}} <span *ngIf="dataset != null" class="px-2">({{dataset?.size | filesize }})</span>
+            </h3>
+            <a *ngIf="dataset != null" class="cursor-pointer px-4 border border-amber-500 text-amber-500 rounded mx-4" (click)="clear()">Clear</a>
+          </div>
+          <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+            <button *ngIf="dataset == null"
+              class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
+              type="button"
+              style="transition:all .15s ease"
+              (click)="file_picker.click()"
+            >
+              Select Dataset
+              <input type="file" hidden #file_picker (change)="selectFile($event)" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="block w-full overflow-x-auto">
+        <!-- Projects table -->
+        <table class="items-center w-full bg-transparent border-collapse" *ngIf="!loading">
+          <thead>
+            <tr>
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Transaction ID
+              </th>
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Device
+              </th>
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Platform
+              </th>
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Browser
+              </th>
+
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Amount
+              </th>
+              
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Product
+              </th>
+
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Card
+              </th>
+
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Type
+              </th>
+
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Predict
+              </th>
+              <th
+                class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                Result
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let rec of recs;index as i">
+              <th class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                {{rec[0]}}
+              </th>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{rec[431]}}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{rec[430]}}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{rec[422]}}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{rec[2] | currency}}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{rec[3]}}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{rec[6]}}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                {{rec[8]}}
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <button *ngIf="!rec[433]"
+                  class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1"
+                  type="button"
+                  style="transition:all .15s ease"
+                  (click)="predictOne(i)"
+                >
+                  Predict
+                </button>
+              </td>
+              <td class="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                <i *ngIf="rec[433] == 0" class="fas fa-thumbs-up text-emerald-500 mr-4"></i>
+                <i *ngIf="rec[433] == 1" class="fas fa-thumbs-down text-red-500 mr-4"></i>
+                <span *ngIf="rec[433] == 1">Fraud</span> 
+                <span *ngIf="rec[433] == 0">Non-Fraud</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p *ngIf="this.recs.length <= 0" class="text-center py-4 font-semibold tracking-wide">Select dataset</p>
+        <div style="display: flex;justify-content: center;align-items: center;" class="py-6 w-full">
+          <mat-spinner *ngIf="loading"></mat-spinner>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

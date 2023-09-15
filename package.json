@@ -1,0 +1,13 @@
+{
+  "name": "fraud-detection-project",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "api": "cd api && python manage.py runserver",
+    "app": "cd front && ng serve --hmr",
+    "start": "concurrently \"yarn api\" \"yarn app\""
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0"
+  }
+}
